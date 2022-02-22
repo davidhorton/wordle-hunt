@@ -361,15 +361,17 @@
                         {
                             key: "setDarkTheme",
                             value: function (e) {
-                                var a = document.querySelector("body");
-                                e && !a.classList.contains("nightmode") ? a.classList.add("nightmode") : a.classList.remove("nightmode"), (this.isDarkTheme = e), window.localStorage.setItem(j, JSON.stringify(e));
+                                //not doing this
+                                //var a = document.querySelector("body");
+                                //e && !a.classList.contains("nightmode") ? a.classList.add("nightmode") : a.classList.remove("nightmode"), (this.isDarkTheme = e), window.localStorage.setItem(j, JSON.stringify(e));
                             },
                         },
                         {
                             key: "setColorBlindTheme",
                             value: function (e) {
-                                var a = document.querySelector("body");
-                                e && !a.classList.contains("colorblind") ? a.classList.add("colorblind") : a.classList.remove("colorblind"), (this.isColorBlindTheme = e), window.localStorage.setItem(S, JSON.stringify(e));
+                                //not doing this
+                                //var a = document.querySelector("body");
+                                //e && !a.classList.contains("colorblind") ? a.classList.add("colorblind") : a.classList.remove("colorblind"), (this.isColorBlindTheme = e), window.localStorage.setItem(S, JSON.stringify(e));
                             },
                         },
                         {
@@ -1039,7 +1041,7 @@
         customElements.define("game-toast", Aa), (window.dataLayer = window.dataLayer || []), Ca("js", new Date());
         Ca("config", "G-2SSGMHY3NP", { app_version: null === (Ea = window.wordle) || void 0 === Ea ? void 0 : Ea.hash, debug_mode: !1 });
         var La = [
-                "couch", //TODO this is the answer, get it from config
+                gameConfig.answer, //this is the answer
             ],
             Ia = "present",
             Ma = "correct",
@@ -1118,12 +1120,12 @@
                 })(o);
         }
         var Ka = document.createElement("template");
-        var title = "B-DAY WORDLE 1" //TODO change this title
+        var title = gameConfig.mainTitle + " " + gameConfig.number
         Ka.innerHTML = "\n  <style>\n  .toaster {\n    position: absolute;\n    top: 10%;\n    left: 50%;\n    transform: translate(-50%, 0);\n    pointer-events: none;\n    width: fit-content;\n  }\n  #game-toaster {\n    z-index: "
             .concat(1e3, ";\n  }\n  #system-toaster {\n    z-index: ")
             .concat(
                 4e3,
-                ';\n  }\n\n  #game {\n    width: 100%;\n    max-width: var(--game-max-width);\n    margin: 0 auto;\n    height: 100%;\n    display: flex;\n    flex-direction: column;\n  }\n  header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    height: var(--header-height);\n    color: var(--color-tone-1);\n    border-bottom: 1px solid var(--color-tone-4);\n  }\n  header .title {\n    font-weight: 700;\n    font-size: 36px;\n    letter-spacing: 0.2rem;\n    text-transform: uppercase;\n    text-align: center;\n    position: absolute;\n    left: 0;\n    right: 0;\n    pointer-events: none;\n  }\n\n  @media (max-width: 360px) {\n    header .title {\n      font-size: 22px;\n      letter-spacing: 0.1rem;\n    }\n  }\n\n  #board-container {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-grow: 1;\n    overflow: hidden;\n  }\n  #board {\n    display: grid;\n    grid-template-rows: repeat(6, 1fr);\n    grid-gap: 5px;\n    padding:10px;\n    box-sizing: border-box;\n  }\n  button.icon {\n    background: none;\n    border: none;\n    cursor: pointer;\n    padding: 0 4px;\n  }\n\n  #debug-tools {\n    position: absolute;\n    bottom: 0;\n  }\n\n  </style>\n  <game-theme-manager>\n    <div id="game">\n      <header>\n        <div class="menu">\n          <button id="help-button" class="icon" aria-label="help">\n            <game-icon icon="help"></game-icon>\n          </button>\n        </div>\n        <div class="title">' + title + '</div>\n        <div class="menu">\n          <button id="statistics-button" class="icon" aria-label="statistics">\n            <game-icon icon="statistics"></game-icon>\n          </button>\n          <button id="settings-button" class="icon" aria-label="settings">\n            <game-icon icon="settings"></game-icon>\n          </button>\n        </div>\n      </header>\n        <div id="board-container">\n          <div id="board"></div>\n        </div>\n        <game-keyboard></game-keyboard>\n        <game-modal></game-modal>\n        <game-page></game-page>\n        <div class="toaster" id="game-toaster"></div>\n        <div class="toaster" id="system-toaster"></div>\n    </div>\n  </game-theme-manager>\n  <div id="debug-tools"></div>\n'
+                ';\n  }\n\n  #game {\n    width: 100%;\n    max-width: var(--game-max-width);\n    margin: 0 auto;\n    height: 100%;\n    display: flex;\n    flex-direction: column;\n  }\n  header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    height: var(--header-height);\n    color: var(--color-tone-1);\n    border-bottom: 1px solid var(--color-tone-4);\n  }\n  header .title {\n    font-weight: 700;\n    font-size: 36px;\n    letter-spacing: 0.2rem;\n    text-transform: uppercase;\n    text-align: center;\n    position: absolute;\n    left: 0;\n    right: 0;\n    pointer-events: none;\n  }\n\n  @media (max-width: 360px) {\n    header .title {\n      font-size: 22px;\n      letter-spacing: 0.1rem;\n    }\n  }\n\n  #board-container {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-grow: 1;\n    overflow: hidden;\n  }\n  #board {\n    display: grid;\n    grid-template-rows: repeat(6, 1fr);\n    grid-gap: 5px;\n    padding:10px;\n    box-sizing: border-box;\n  }\n  button.icon {\n    background: none;\n    border: none;\n    cursor: pointer;\n    padding: 0 4px;\n  }\n\n  #debug-tools {\n    position: absolute;\n    bottom: 0;\n  }\n\n  </style>\n  <game-theme-manager>\n    <div id="game">\n      <header>\n        <div class="menu">\n          <button id="help-button" class="icon" aria-label="help">\n            <game-icon icon="help"></game-icon>\n          </button>\n        </div>\n        <div class="title">' + title + '</div>\n        </header>\n        <div id="board-container">\n          <div id="board"></div>\n        </div>\n        <game-keyboard></game-keyboard>\n        <game-modal></game-modal>\n        <game-page></game-page>\n        <div class="toaster" id="game-toaster"></div>\n        <div class="toaster" id="system-toaster"></div>\n    </div>\n  </game-theme-manager>\n  <div id="debug-tools"></div>\n'
             );
         var Qa = document.createElement("template");
         Qa.innerHTML = '\n<button id="reveal">reveal</button>\n<button id="shake">shake</button>\n<button id="bounce">bounce</button>\n<button id="toast">toast</button>\n<button id="modal">modal</button>\n';
@@ -1307,48 +1309,50 @@
                                     this.sizeBoard(),
                                 this.lastPlayedTs ||
                                 setTimeout(function () {
-                                    return e.showHelpModal();
+                                    if (gameConfig.isFirstOne) {
+                                        return e.showHelpModal();
+                                    }
                                 }, 100);
                                 for (var a = 0; a < 6; a++) {
                                     var s = document.createElement("game-row");
                                     s.setAttribute("letters", this.boardState[a]), s.setAttribute("length", 5), this.evaluations[a] && (s.evaluation = this.evaluations[a]), this.$board.appendChild(s);
                                 }
 
-                                //TODO have some logic around this
-                                var secretCodeLabel = document.createElement("label");
-                                secretCodeLabel.setAttribute("id", "secretcodelabel")
-                                secretCodeLabel.setAttribute("for", "secretcode")
-                                secretCodeLabel.setAttribute("class", "secret-code")
-                                secretCodeLabel.style.display = "none"
-                                secretCodeLabel.innerText = "Secret Code:"
-                                this.$board.appendChild(secretCodeLabel)
+                                if (!gameConfig.isLastOne) {
+                                    var secretCodeLabel = document.createElement("label");
+                                    secretCodeLabel.setAttribute("id", "secretcodelabel")
+                                    secretCodeLabel.setAttribute("for", "secretcode")
+                                    secretCodeLabel.setAttribute("class", "secret-code")
+                                    secretCodeLabel.style.display = "none"
+                                    secretCodeLabel.innerText = "Secret Code:"
+                                    this.$board.appendChild(secretCodeLabel)
 
-                                var secretCode = document.createElement("input");
-                                secretCode.setAttribute("type", "text")
-                                secretCode.setAttribute("id", "secretcode")
-                                secretCode.setAttribute("class", "secret-code")
-                                secretCode.style.display = "none"
-                                this.$board.appendChild(secretCode)
+                                    var secretCode = document.createElement("input");
+                                    secretCode.setAttribute("type", "text")
+                                    secretCode.setAttribute("id", "secretcode")
+                                    secretCode.setAttribute("class", "secret-code")
+                                    secretCode.style.display = "none"
+                                    this.$board.appendChild(secretCode)
 
-                                var nextLink = document.createElement("a");
-                                nextLink.setAttribute("href", "http://192.168.0.114:8080/birthdayWordle2.html")//TODO get this from the config
-                                nextLink.setAttribute("id", "secretcodelink")
-                                nextLink.innerText = "Next"
-                                nextLink.style.display = "none"
-                                this.$board.appendChild(nextLink)
+                                    var nextLink = document.createElement("a");
+                                    nextLink.setAttribute("href", "wordleHunt.html?number=" + (gameConfig.number + 1))
+                                    nextLink.setAttribute("id", "secretcodelink")
+                                    nextLink.innerText = "Next"
+                                    nextLink.style.display = "none"
+                                    this.$board.appendChild(nextLink)
 
-                                secretCode.addEventListener('keypress', function (ev) {
-                                    console.log("got to here")
-                                    if (ev.key === 'Enter') {
-                                        var code = e.$board.querySelector("#secretcode").value
-                                        if (code === "4058") { //TODO get this from the config
-                                            e.addToast("That's the code!", 2e3)
-                                            e.$board.querySelector("#secretcodelink").style.display = "block"
-                                        } else {
-                                            e.addToast("Wrong code!", 2e3)
+                                    secretCode.addEventListener('keypress', function (ev) {
+                                        if (ev.key === 'Enter') {
+                                            var code = e.$board.querySelector("#secretcode").value
+                                            if (code === gameConfig.code) {
+                                                e.addToast("That's the code!", 2e3)
+                                                e.$board.querySelector("#secretcodelink").style.display = "block"
+                                            } else {
+                                                e.addToast("Wrong code!", 2e3)
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                                }
 
                                 this.$game.addEventListener("game-key-press", function (a) {
                                     var s = a.detail.key;
@@ -1357,11 +1361,19 @@
                                     this.$game.addEventListener("game-last-tile-revealed-in-row", function (a) {
                                         (e.$keyboard.letterEvaluations = e.letterEvaluations), e.rowIndex < 6 && (e.canInput = !0);
                                         var s = e.$board.querySelectorAll("game-row")[e.rowIndex - 1];
+
+                                        function toggleSecretCode() {
+                                            if (!gameConfig.isLastOne) {
+                                                e.$board.querySelector("#secretcode").style.display = "block";
+                                                e.$board.querySelector("#secretcodelabel").style.display = "block";
+                                            }
+                                        }
+
                                         (a.path || (a.composedPath && a.composedPath())).includes(s) &&
                                         ([es, as].includes(e.gameStatus) &&
                                         (e.restoringFromLocalStorage
                                             ? e.showStatsModal()
-                                            : (e.gameStatus === es && (s.setAttribute("win", ""), e.addToast(ss[e.rowIndex - 1], 2e3), e.$board.querySelector("#secretcode").style.display = "block", e.$board.querySelector("#secretcodelabel").style.display = "block", e), //TODO needs logic
+                                            : (e.gameStatus === es && (s.setAttribute("win", ""), e.addToast(ss[e.rowIndex - 1], 2e3), toggleSecretCode(), e),
                                             e.gameStatus === as && e.addToast(e.solution.toUpperCase(), 1 / 0),
                                                 setTimeout(function () {
                                                     e.showStatsModal();
@@ -1378,22 +1390,12 @@
                                                 return void (n ? e.addToast("Hard mode can only be enabled at the start of a round", 1500, !0) : ((e.hardMode = o), ja({ hardMode: o })));
                                         }
                                     }),
-                                    this.shadowRoot.getElementById("settings-button").addEventListener("click", function (a) {
-                                        var s = e.$game.querySelector("game-page"),
-                                            t = document.createTextNode("Settings");
-                                        s.appendChild(t);
-                                        var o = document.createElement("game-settings");
-                                        o.setAttribute("slot", "content"), (o.gameApp = e), s.appendChild(o), s.setAttribute("open", "");
-                                    }),
                                     this.shadowRoot.getElementById("help-button").addEventListener("click", function (a) {
                                         var s = e.$game.querySelector("game-page"),
                                             t = document.createTextNode("How to play");
                                         s.appendChild(t);
                                         var o = document.createElement("game-help");
                                         o.setAttribute("page", ""), o.setAttribute("slot", "content"), s.appendChild(o), s.setAttribute("open", "");
-                                    }),
-                                    this.shadowRoot.getElementById("statistics-button").addEventListener("click", function (a) {
-                                        e.showStatsModal();
                                     }),
                                     window.addEventListener("resize", this.sizeBoard.bind(this));
                             },
@@ -1952,7 +1954,7 @@
         customElements.define("game-switch", Ps);
         var $s = document.createElement("template");
         $s.innerHTML =
-            '\n  <style>\n  .instructions {\n    font-size: 14px;\n    color: var(--color-tone-1)\n  }\n\n  .examples {\n    border-bottom: 1px solid var(--color-tone-4);\n    border-top: 1px solid var(--color-tone-4);\n  }\n\n  .example {\n    margin-top: 24px;\n    margin-bottom: 24px;\n  }\n\n  game-tile {\n    width: 40px;\n    height: 40px;\n  }\n\n  :host([page]) section {\n    padding: 16px;\n    padding-top: 0px;\n  }\n\n  </style>\n  <section>\n    <div class="instructions">\n    <p>Jessica!</p>  <p>Guess the <strong>BIRTHDAY WORDLE</strong> in 6 tries.</p>\n      <p>The answer will lead you to someplace on the Horton property.</p> <p>Look for a secret code on a green post-it note.</p> <p>Input the code, and get the next clue!</p> </div>\n  </section>\n';
+            '\n  <style>\n  .instructions {\n    font-size: 14px;\n    color: var(--color-tone-1)\n  }\n\n  .examples {\n    border-bottom: 1px solid var(--color-tone-4);\n    border-top: 1px solid var(--color-tone-4);\n  }\n\n  .example {\n    margin-top: 24px;\n    margin-bottom: 24px;\n  }\n\n  game-tile {\n    width: 40px;\n    height: 40px;\n  }\n\n  :host([page]) section {\n    padding: 16px;\n    padding-top: 0px;\n  }\n\n  </style>\n  <section>\n    <div class="instructions">\n    <p>' + gameConfig.participant + '!</p>  <p>Guess the <strong>' + gameConfig.description + '</strong> in 6 tries.</p>\n      <p>The answer will lead you to someplace on our property.</p> <p>Look for a secret code on a green post-it note.</p> <p>Input the code, and get the next clue!</p> </div>\n  </section>\n';
         var Hs = (function (e) {
             r(t, e);
             var a = h(t);
